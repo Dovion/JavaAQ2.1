@@ -4,8 +4,7 @@ public class Radio {
 
 
     private int station;
-    private int stationMax = 10;
-    private int stationMin = 0;
+    private int countStation = 10;// Кол-во станций, а не номер максимальной
     private int volume;
     private int volumeMax = 100;
     private int volumeMin = 0;
@@ -16,7 +15,7 @@ public class Radio {
     }
 
     public Radio(int stationMax) {
-        this.stationMax = stationMax;
+        this.countStation = stationMax;
     }
 
     public int getStation() {
@@ -24,14 +23,14 @@ public class Radio {
     }
 
     public void setStation(int station) {
-        if (stationMax == stationMin) {
-            this.station = stationMin;
+        if (countStation == 0) {
+            this.station = 0;
         }
-        else if (station >= stationMax) {
-            this.station = stationMax-1;
+        else if (station >= countStation) {
+            this.station = countStation-1;
         }
-        else if (station <= stationMin) {
-            this.station = stationMin;
+        else if (station <= 0) {
+            this.station = 0;
         }
         else {
             this.station = station;
@@ -45,8 +44,8 @@ public class Radio {
     public void setVolume(int volume) {
         if (volume >= volumeMax) {
             this.volume = volumeMax;
-        } else if (volume <= stationMin) {
-            this.volume = stationMin;
+        } else if (volume <= 0) {
+            this.volume = 0;
         } else {
             this.volume = volume;
         }
@@ -60,8 +59,8 @@ public class Radio {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public int increaseStation() {
-        if (station >= stationMax-1) {
-            this.station = stationMin;
+        if (station >= countStation-1) {
+            this.station = 0;
         } else {
             this.station = ++station;
         }
@@ -70,10 +69,10 @@ public class Radio {
     }
 
     public int decreaseStation() {
-        if (stationMax == stationMin) {
-            this.station = stationMin;
-        } else if (station <= stationMin) {
-            this.station = stationMax-1;
+        if (countStation == 0) {
+            this.station = 0;
+        } else if (station <= 0) {
+            this.station = countStation-1;
         } else {
             this.station = --station;
         }
@@ -105,14 +104,14 @@ public class Radio {
         for (char element : zero.toCharArray()){
             if (element == '0') countZero++;
         }
-        if (stationMax == stationMin) {
-            this.station = stationMin;
+        if (countStation == 0) {
+            this.station = 0;
         }
-        else if (countZero <= stationMin) {
+        else if (countZero <= 0) {
             this.station = station;
         }
-        else if (countZero >= stationMax) {
-            this.station = stationMax-1;
+        else if (countZero >= countStation) {
+            this.station = countStation-1;
         }
         else {
             this.station = countZero;
